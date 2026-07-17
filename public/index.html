@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Creator Website Designer</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="app-header">
+        <div class="logo">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+            <h1>AI Designer</h1>
+        </div>
+        <form id="analyzeForm" class="search-form">
+            <input type="text" id="channelHandle" placeholder="Enter YouTube Handle (e.g. @piyushgargdev)" required>
+            <button type="submit" id="submitBtn">Generate Design</button>
+        </form>
+    </header>
+
+    <div id="loader" class="hidden">
+        <div class="spinner"></div>
+        <p>Analyzing Channel & Coding HTML Template... (this takes ~15 seconds)</p>
+    </div>
+
+    <div id="error" class="hidden error-box"></div>
+
+    <main class="preview-container">
+        <iframe id="previewFrame" title="Generated Website Preview" sandbox="allow-scripts"></iframe>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>

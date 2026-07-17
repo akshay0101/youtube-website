@@ -1,0 +1,100 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "AI Creator Website Designer API",
+    "version": "1.0.0",
+    "description": "API for generating website design proposals based on YouTube channels."
+  },
+  "paths": {
+    "/api/analyze": {
+      "post": {
+        "summary": "Analyze YouTube Channel and Generate Design",
+        "description": "Fetches channel data from YouTube API and uses Gemini LLM to generate a customized website design proposal.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "handle": {
+                    "type": "string",
+                    "example": "@mkbhd",
+                    "description": "The YouTube channel handle (e.g. @mkbhd)"
+                  }
+                },
+                "required": ["handle"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful generation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "type": "object",
+                      "properties": {
+                        "title": { "type": "string" },
+                        "profilePic": { "type": "string" },
+                        "banner": { "type": "string" }
+                      }
+                    },
+                    "design": {
+                      "type": "object",
+                      "properties": {
+                        "theme_name": { "type": "string" },
+                        "vibe_description": { "type": "string" },
+                        "colors": {
+                          "type": "object",
+                          "properties": {
+                            "background": { "type": "string" },
+                            "primary": { "type": "string" },
+                            "secondary": { "type": "string" },
+                            "accent": { "type": "string" }
+                          }
+                        },
+                        "typography": {
+                          "type": "object",
+                          "properties": {
+                            "headings": { "type": "string" },
+                            "body": { "type": "string" }
+                          }
+                        },
+                        "layout_sections": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "name": { "type": "string" },
+                              "description": { "type": "string" }
+                            }
+                          }
+                        },
+                        "primary_cta": {
+                          "type": "object",
+                          "properties": {
+                            "text": { "type": "string" },
+                            "link_destination": { "type": "string" }
+                          }
+                        },
+                        "design_rationale": { "type": "string" }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": { "description": "Missing handle" },
+          "404": { "description": "Channel not found" },
+          "500": { "description": "Server Error" }
+        }
+      }
+    }
+  }
+}
